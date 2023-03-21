@@ -6,7 +6,7 @@
 %parameters will explain why). 
 
 %Testing protocol: Input p, v0. Find: 1) best lqr controller, 2) 2 other
-%random successful lqr controllers, 3)grid search controller. Then, test for 1)
+%random successful lqr controllers, 3) grid search controller, 4) old lqr controller. Then, test for 1)
 %speed of stability, 2) max amplitude of delta_dot, 3) largest stabilizing
 %actuation flaw against controllers 1,2,3 and [11, 2,-6] 
 
@@ -31,7 +31,7 @@ specs(4,1:3) = K3;
 specs(5,1:3) = K4; 
 t1 = 0.00;
 t2 = 0.00;
-figure("Name", "Parameters" +p.b+"," + p.h+ ","+ p.l);
+fig = figure("Name", "Parameters" +p.b+"," + p.h+ ","+ p.l, 'visible', 'off');
 hold off
 subplot(2,2,1)
 for a = 1:5
@@ -60,14 +60,19 @@ tl2 = specs(:,7);
 tls = specs(:,8);
 T = table(k_1,k_2,k_3,stabilize, speed, tl1,tl2,tls)
 legend("oldlqr","bestlqr","rand1","rand2","grid\_tuned");
+
 hold off
 
-catch 
-    %global try/catch failure, to be refined. 
-    fprintf("\nfailed\n")
+% Save to custom file in results folder
+warning('off', 'MATLAB:MKDIR:DirectoryExists');
+fold = fullfile(pwd, "results", datestr(datetime, 'yyyy_mm_dd'), "fitness");
+mkdir (fold);
 
+saveas(fig, fullfile(fold, p.b+"_" + p.h+ "_"+ p.l+".svg"));
 
-
+catch ex
+    %global try/catch failure, printed with error and stack information
+    fprintf("\nfailed with error:\n%s", getReport(ex))
 
 
 end

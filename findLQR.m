@@ -38,6 +38,9 @@ A = [   0       1       0
 B = [   0  -b*v/(h*l)   1]';
 
 %t = linspace(0.01,1,100);
+% Look through different weightings of the state-cost matrix, where the 
+% ratio to the input-cost matrix will determine how constrained the model
+% is by state (bike lean) error vs input (turn angle) requirements.
 t = logspace(-1,4,100);
 result = zeros(length(t),8);
 trial = 1;
