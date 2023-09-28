@@ -35,11 +35,11 @@ figure("Name", "Parameters" +p.b+"," + p.h+ ","+ p.l);
 hold off
 subplot(2,2,1)
 for a = 1:5
-    [success,states, stable] = runBicycleTestR(x,y,v,delta0,phi0, phi_dot0,psi0,p,  specs(a,1:3), 0, t1,t2, 10000,  0);
+    [success,states, stable] = runBicycleTestR(x,y,v,delta0,phi0, phi_dot0,psi0,p,  specs(a,1:3), 0, t1,t2, 10000,  0, 0);
     specs(a, 4) = stable; 
     
      plotController(x,y,v,delta0,phi0, ...
-                phi_dot0,psi0,p,  specs(a,1:3), 0, t1,t2,  500,  0);
+                phi_dot0,psi0,p,  specs(a,1:3), 0, t1,t2,  500,  0, 1);
     [minspeed] = SpeedTest(specs(a,1:3), p);
     specs(a,5) = minspeed; 
    % fprintf("\n"+specs(a,1) + ", " + stable+"\n"); 

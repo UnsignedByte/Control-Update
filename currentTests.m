@@ -3,9 +3,10 @@
 %tuned otherwise, and pl, pb, and ph are set to be the fairly reasonable
 %proportions of a standard adult-sized bicycle.
 
+% (COM = Center of Mass)
 %define parameters
    pg = linspace(9.8,9.81,1); %acceleration due to gravity
-   pl = linspace(0.8, 1.2,3); %length of wheel base 
+   pl = linspace(0.8, 1.2,3); %length of wheel-to-wheel base 
    pb = linspace(0.15,0.6, 3); %distance from rear wheel to COM projected onto ground
    ph = linspace(0.5, 1.1, 3); %height of COM in point mass model
 % h is not the same as the height of COM of the bicycle, h is
@@ -21,7 +22,7 @@
                    p.b = b;
                    p.l = l; 
                    p.g = g;
-                   x = fitnessTest(p, v0);
+                   x = fitnessTest(p, v0, 1);
                end 
            end
        end

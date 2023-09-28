@@ -13,7 +13,7 @@ for x=x
    [success,~,~] =  runBicycleTestR(0,0,v0,0,0.00, ...
                 0,0,p, K, 0, x,y, 200,  0); 
            plotController(0,0,v0,0,0.00, ...
-                0,0,p, K, 0, x,y, 200,  0); 
+                0,0,p, K, 0, x,y, 200,  0, 0); 
    result(trial, 5) = y*x;
      result(trial,4) = y+x;
    result(trial,3) = y; 

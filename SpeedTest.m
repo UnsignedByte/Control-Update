@@ -18,7 +18,23 @@ trial =1;
 for v=v 
     for t1 = lag1
         for t2 = lag2
-    [success, state] = runBicycleTestR(0,0,v,0, pi/6,0,0,p,K,0,t1,t2,1000,0);
+    [success, state] = runBicycleTestR( ...
+        0,      ... % initial x
+        0,      ... % initial y
+        v,      ... % initial velocity
+        0,      ... % initial delta
+        pi/6,   ... % initial phi
+        0,      ... % initial phi velocity
+        0,      ... % initial bike facing angle
+        p,      ... % bike parameters
+        K,      ... % gains matrix
+        0,      ... % steer offset per timestep
+        t1,     ... % lag1 (observability)
+        t2,     ... % lag2 (controls lag)
+        1000,   ... % number of timesteps
+        0,      ... % show graph
+        0       ... % continue
+    );
     result(trial,1)= success;
     result(trial,2)= v;
     result(trial,3) = t1;

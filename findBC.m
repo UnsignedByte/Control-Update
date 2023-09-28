@@ -21,7 +21,7 @@ for a=k1
         for c=k3
             K = [a, b, c];
 
-            [success, state] = runBicycleTestR(x,y,v,delta0,phi0,phi_dot0,psi0,p,K,0,lag1,lag2, 400,0);  
+            [success, state] = runBicycleTestR(x,y,v,delta0,phi0,phi_dot0,psi0,p,K,0,lag1,lag2, 400,0,0);  
             
             phi = state(:,4);
             delta = state(:,6);

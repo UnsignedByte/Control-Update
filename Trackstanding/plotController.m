@@ -1,5 +1,5 @@
 function [] = plotController(x0,y0,v0,delta0,phi0, ...
-                phi_dot0,psi0,p,  K, delta_offset, lag1,lag2,  numtime,  graph)
+                phi_dot0,psi0,p,  K, delta_offset, lag1,lag2,  numtime,  graph, cont)
 %adapted from PlotMultipleControllersTogether to be usable with multiple
 %timelags and to be usable as a function with many inputs.
 %timelag specifies the lag between observing and acting on the state;
@@ -7,7 +7,7 @@ function [] = plotController(x0,y0,v0,delta0,phi0, ...
 %only 
  
     [~, offset0] = runBicycleTestR(x0,y0,v0,delta0,phi0, ...
-                phi_dot0,psi0, p,K, delta_offset,lag1,lag2, numtime,graph);
+                phi_dot0,psi0, p,K, delta_offset,lag1,lag2, numtime,graph,cont);
  
 
     times = offset0(1:numtime,1);
