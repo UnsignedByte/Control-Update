@@ -24,7 +24,7 @@ v0 = v0;
 
 % Save to custom file in results folder
 warning('off', 'MATLAB:MKDIR:DirectoryExists');
-fold = fullfile(pwd, "results", datestr(datetime, 'yyyy_mm_dd'), "fitness", "l"+p.l+ "_b"+ p.b+"_h" + p.h);
+fold = fullfile(pwd, "results", datestr(datetime, 'yyyy_mm_dd'), "fitness", "l"+p.l+ "_b"+ p.b+"_h" + p.h+"_g" + p.g);
 mkdir (fold)
 try
     rmdir (fold, 's')
@@ -72,10 +72,12 @@ try
     tl2 = specs(:,7);
     tls = specs(:,8);
     labels = ["old_lqr","best_lqr","rand_lqr_1","rand_lqr_2","grid_tuned"];
-    T = table(k_1,k_2,k_3,stabilize, speed, tl1,tl2,tls, 'RowNames', labels)
+    T = table(k_1,k_2,k_3,stabilize, speed, tl1,tl2,tls, 'RowNames', labels);
     legend(labels);
 
     hold off
+
+    writetable(T, fullfile(fold, "data.csv"));
 
     saveas(fig, fullfile(fold, "summary.svg"));
     saveas(fig, fullfile(fold, "summary.png"));
@@ -88,6 +90,7 @@ try
             mkdir (df)
             delays = fopen(fullfile(df, "delays.txt"), 'w');
             fprintf(delays, specs(a, 6)+"\n"+specs(a, 7));
+            fclose(delays)
             % simulate the test again with the proper delays
             [~, states, ~, motCommands, phi_offset] = runBicycleTestR(x0,y0,v0,delta0,phi0, phi_dot0,psi0,p, specs(a, 1:3), 0, specs(a, 6), specs(a, 7), 1000,0,1);
             %% Stolen from animateBike.m and repurposed to save files
